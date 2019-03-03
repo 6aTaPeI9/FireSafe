@@ -1,0 +1,10 @@
+c:\users\artem\source\repos\FireSafety\FireSafety\bin\Debug\FireSafety.exe.config
+c:\users\artem\source\repos\FireSafety\FireSafety\bin\Debug\FireSafety.exe
+c:\users\artem\source\repos\FireSafety\FireSafety\bin\Debug\FireSafety.pdb
+c:\users\artem\source\repos\FireSafety\FireSafety\obj\Debug\FireSafety.csprojAssemblyReference.cache
+c:\users\artem\source\repos\FireSafety\FireSafety\obj\Debug\FireSafety.Form1.resources
+c:\users\artem\source\repos\FireSafety\FireSafety\obj\Debug\FireSafety.Properties.Resources.resources
+c:\users\artem\source\repos\FireSafety\FireSafety\obj\Debug\FireSafety.csproj.GenerateResource.cache
+c:\users\artem\source\repos\FireSafety\FireSafety\obj\Debug\FireSafety.csproj.CoreCompileInputs.cache
+c:\users\artem\source\repos\FireSafety\FireSafety\obj\Debug\FireSafety.exe
+c:\users\artem\source\repos\FireSafety\FireSafety\obj\Debug\FireSafety.pdb
