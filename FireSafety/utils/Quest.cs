@@ -9,21 +9,20 @@ namespace FireSafety
 {
     //Класс содержащий всю информацию о вопросах находящихся 
     //под одним индексом в базе
+    [Serializable]
     public class Quest
     {
-        public Quest(string question = "", Image main_image = null, Image[] images = null, string[] questions = null)
+        public Quest(string data, string question, int right_answer)
         {
+            Data = data;
             Question = question;
-            MainImage = main_image;
-            Images = images;
-            Questions = questions;
+            RightAnswer = right_answer;
             SelectedIndex = -1;
         }
 
+        public string Data { get; set; }
         public string Question { get; set; }
-        public Image MainImage { get; set; }
-        public Image[] Images { get; set; }
-        public string[] Questions { get; set; }
+        public int RightAnswer { get; set; }
         public int Index { get; set; }
         public Quest Previous { get; set; }
         public Quest Next { get; set; }
@@ -31,6 +30,7 @@ namespace FireSafety
     }
 
     //Класс для работы с классом Quest
+    [Serializable]
     public class LinkedQuestList
     {
         Quest last; //Последний элемент
@@ -39,9 +39,9 @@ namespace FireSafety
         public int count = 0; //Количество вопросов
 
         //Добавляем элемент в класс Quest
-        public void Add(string question = "", Image main_image = null, Image[] images = null, string[] questions = null)
+        public void Add(string data, string question, int right_answer)
         {
-            Quest node = new Quest(question, main_image, images, questions);
+            Quest node = new Quest(data, question, right_answer);
 
             if (curent == null)
             {
@@ -118,20 +118,23 @@ namespace FireSafety
             }
         }
 
-        //Получаем сумму ответов пользователя.
         public int GetHappyIndex()
         {
-            int HappyIndex = 0;
+            int right_count = 0;
             Quest iter;
             iter = first;
-            for(int i = 0; i <= this.count-1; i++)
+            for (int i = 0; i <= this.count - 1; i++)
             {
+
                 if (iter.SelectedIndex == -1)
                     return -1;
-                HappyIndex += iter.SelectedIndex - 1;
+
+                if (iter.SelectedIndex == iter.RightAnswer)
+                    right_count++;
+
                 iter = iter.Next;
             }
-            return HappyIndex;
+            return right_count;
         }
 
         public int GetCurIndex()

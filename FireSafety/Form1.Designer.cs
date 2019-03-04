@@ -101,31 +101,35 @@
             // 
             // toolStripStatusLabel1
             // 
+            this.toolStripStatusLabel1.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.toolStripStatusLabel1.ForeColor = System.Drawing.SystemColors.Control;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(63, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(64, 17);
             this.toolStripStatusLabel1.Text = "Попыток: ";
             this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
             // 
             // PointsLabel
             // 
+            this.PointsLabel.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.PointsLabel.ForeColor = System.Drawing.SystemColors.Control;
             this.PointsLabel.Name = "PointsLabel";
-            this.PointsLabel.Size = new System.Drawing.Size(13, 17);
+            this.PointsLabel.Size = new System.Drawing.Size(15, 17);
             this.PointsLabel.Text = "0";
             // 
             // toolStripStatusLabel2
             // 
+            this.toolStripStatusLabel2.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.toolStripStatusLabel2.ForeColor = System.Drawing.SystemColors.Control;
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(48, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(54, 17);
             this.toolStripStatusLabel2.Text = "Время: ";
             // 
             // TimeLabe
             // 
+            this.TimeLabe.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.TimeLabe.ForeColor = System.Drawing.SystemColors.Control;
             this.TimeLabe.Name = "TimeLabe";
-            this.TimeLabe.Size = new System.Drawing.Size(13, 17);
+            this.TimeLabe.Size = new System.Drawing.Size(15, 17);
             this.TimeLabe.Text = "0";
             // 
             // timer1
@@ -146,6 +150,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(968, 680);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panel2);

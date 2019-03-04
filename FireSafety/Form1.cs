@@ -22,7 +22,6 @@ namespace FireSafety
         Dictionary<string, Image> images;
         List<utils.GameImages> deserilize_game;
         List<utils.TargetImages> deserilize;
-        int curent_main_row = 0;
         int count_target_rows = 0;
         int count_target_pb = 0;
         int complited_rows = 0;
@@ -30,14 +29,13 @@ namespace FireSafety
         System.Windows.Forms.Control parent_panel;
         DateTime time_start;
         int all_attemp = 0;
-
-        string folderPath = "C:\\Users\\Artem\\source\\repos\\FireSafety\\FireSafety\\bin\\Debug\\GameImages";
+        string folderPath = Environment.CurrentDirectory + "\\GameImages";
 
         public Form1()
         {
             InitializeComponent();
-            serialize_list_images();
-            serialice_game_images();
+            //serialize_list_images();
+            //serialice_game_images();
             DeserializeMainPage();
             DeserializeGameImage();
             BuildMainPage();
@@ -114,9 +112,9 @@ namespace FireSafety
             Control ctr = (Control)sender;
             int x = ctr.Location.X;
             int y = ctr.Location.Y;
-            if (curent_main_row <= count_target_rows)
+            if (complited_rows < count_target_rows)
             {
-                var row = deserilize[curent_main_row];
+                var row = deserilize[complited_rows];
                 foreach (KeyValuePair<string, string> info in row.coord_blockers)
                 {
                     if (Controls.ContainsKey(info.Key))
@@ -168,7 +166,7 @@ namespace FireSafety
 
         private void BuildMainPage()
         {
-            var row = deserilize[curent_main_row];
+            var row = deserilize[complited_rows];
 
             Image def_image = Image.FromFile(Application.StartupPath + "\\Design\\input.jpg");
             count_target_rows = deserilize.Count();
@@ -220,14 +218,17 @@ namespace FireSafety
                     if (count_target_pb == 0)
                     {
                         complited_rows++;
-                        if (curent_main_row != count_target_rows)
+                        if (complited_rows < count_target_rows)
                         {
-                            curent_main_row++;
                             BuildMainPage();
                         }
                         else
                         {
-                            MessageBox.Show("ВСЕ!!!!");
+                            utils.stats.GameTime = DateTime.Now - time_start;
+                            utils.stats.WrongAnswers = all_attemp;
+                            FormWithTest fwt = new FormWithTest();
+                            fwt.Show();
+                            this.Hide();
                         }
                     }
                 }
@@ -282,10 +283,10 @@ namespace FireSafety
 
         private void serialice_game_images()
         {
-            string image_1 = "C:\\Users\\Artem\\source\\repos\\FireSafety\\FireSafety\\bin\\Debug\\Design\\Znaki-pozh-bezopasnosti.jpg";
-            string image_2 = "C:\\Users\\Artem\\source\\repos\\FireSafety\\FireSafety\\bin\\Debug\\Design\\Без имени2.bmp";
-            string image_3 = "C:\\Users\\Artem\\source\\repos\\FireSafety\\FireSafety\\bin\\Debug\\Design\\z12.jpg";
-            string image_4 = "C:\\Users\\Artem\\source\\repos\\FireSafety\\FireSafety\\bin\\Debug\\Design\\Fire.bmp";
+            string image_1 = Environment.CurrentDirectory + "\\Design\\Znaki-pozh-bezopasnosti.jpg";
+            string image_2 = Environment.CurrentDirectory + "\\Design\\Без имени2.bmp";
+            string image_3 = Environment.CurrentDirectory + "\\Design\\z12.jpg";
+            string image_4 = Environment.CurrentDirectory + "\\Design\\Fire.bmp";
             Image img1 = Image.FromFile(image_1);
             Image img2 = Image.FromFile(image_2);
             Image img3 = Image.FromFile(image_3);
@@ -313,7 +314,7 @@ namespace FireSafety
 
                 {"FireGidrant_Target", "246:554"},
                 {"ButtonFireSettings_Target", "460:554"},
-                {"Annunciator_Target", "675:554"},
+                {"Annunciator_Target", "675:554"}
             };
 
             Dictionary<string, string> numbers2 = new Dictionary<string, string>
@@ -335,7 +336,7 @@ namespace FireSafety
                 {"Okislitel_Target", "724:283"},
                 {"RadPole_Target", "260:462"},
                 {"AlarmCold_Target", "733:462"},
-                {"TooLongName_Target", "852:462"},
+                {"TooLongName_Target", "852:462"}
             };
 
             Dictionary<string, string> numbers4 = new Dictionary<string, string>
@@ -348,7 +349,7 @@ namespace FireSafety
                 {"Prohod_Target", "338:369"},
                 {"DidntUsePhone_Target", "668:369"},
                 {"Metal_Target", "338:504"},
-                {"NePodhodit_Target", "668:504"},
+                {"NePodhodit_Target", "555:504"}
             };
 
             targets.Add(new utils.TargetImages(img1, numbers));
@@ -410,7 +411,15 @@ namespace FireSafety
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            TimeLabe.Text = (DateTime.Now - time_start).Seconds.ToString();
+            TimeSpan delta = DateTime.Now - time_start;
+            TimeLabe.Text = delta.ToString(@"mm\:ss");
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            FormWithTest fwt = new FormWithTest();
+            fwt.Show();
+            this.Hide();
         }
     }
 }
