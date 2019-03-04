@@ -137,6 +137,14 @@ namespace FireSafety
             return right_count;
         }
 
+        public bool IsLast()
+        {
+            if (curent.Next is null)
+                return true;
+            else
+                return false;
+        }
+
         public int GetCurIndex()
         {
             return curent.Index;

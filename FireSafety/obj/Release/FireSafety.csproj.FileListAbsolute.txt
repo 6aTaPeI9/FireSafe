@@ -1,0 +1,16 @@
+C:\Users\Artem\source\repos\FireSafety\FireSafety\bin\Release\FireSafety.exe.config
+C:\Users\Artem\source\repos\FireSafety\FireSafety\bin\Release\FireSafety.exe
+C:\Users\Artem\source\repos\FireSafety\FireSafety\bin\Release\FireSafety.pdb
+C:\Users\Artem\source\repos\FireSafety\FireSafety\obj\Release\FireSafety.Form1.resources
+C:\Users\Artem\source\repos\FireSafety\FireSafety\obj\Release\FireSafety.FormWithTest.resources
+C:\Users\Artem\source\repos\FireSafety\FireSafety\obj\Release\FireSafety.GameResult.resources
+C:\Users\Artem\source\repos\FireSafety\FireSafety\obj\Release\FireSafety.Properties.Resources.resources
+C:\Users\Artem\source\repos\FireSafety\FireSafety\obj\Release\FireSafety.QuestPanel.resources
+C:\Users\Artem\source\repos\FireSafety\FireSafety\obj\Release\FireSafety.csproj.GenerateResource.cache
+C:\Users\Artem\source\repos\FireSafety\FireSafety\obj\Release\FireSafety.csproj.CoreCompileInputs.cache
+C:\Users\Artem\source\repos\FireSafety\FireSafety\obj\Release\FireSafety.exe
+C:\Users\Artem\source\repos\FireSafety\FireSafety\obj\Release\FireSafety.pdb
+C:\Users\Artem\source\repos\FireSafety\FireSafety\obj\Release\FireSafety.csprojAssemblyReference.cache
+C:\Users\Artem\source\repos\FireSafety\FireSafety\obj\Release\FireSafety.Game.resources
+C:\Users\Artem\source\repos\FireSafety\FireSafety\obj\Release\FireSafety.Test.resources
+C:\Users\Artem\source\repos\FireSafety\FireSafety\obj\Release\FireSafety.Result.resources

@@ -11,3 +11,6 @@ c:\users\artem\source\repos\FireSafety\FireSafety\obj\Debug\FireSafety.pdb
 C:\Users\Artem\source\repos\FireSafety\FireSafety\obj\Debug\FireSafety.FormWithTest.resources
 C:\Users\Artem\source\repos\FireSafety\FireSafety\obj\Debug\FireSafety.QuestPanel.resources
 C:\Users\Artem\source\repos\FireSafety\FireSafety\obj\Debug\FireSafety.GameResult.resources
+C:\Users\Artem\source\repos\FireSafety\FireSafety\obj\Debug\FireSafety.Game.resources
+C:\Users\Artem\source\repos\FireSafety\FireSafety\obj\Debug\FireSafety.Result.resources
+C:\Users\Artem\source\repos\FireSafety\FireSafety\obj\Debug\FireSafety.Test.resources

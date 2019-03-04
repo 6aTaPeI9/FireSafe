@@ -58,6 +58,12 @@
     <Compile Include="FormWithTest.Designer.cs">
       <DependentUpon>FormWithTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Game.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Game.Designer.cs">
+      <DependentUpon>Game.cs</DependentUpon>
+    </Compile>
     <Compile Include="GameResult.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +78,18 @@
     <Compile Include="QuestPanel.Designer.cs">
       <DependentUpon>QuestPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Result.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Result.Designer.cs">
+      <DependentUpon>Result.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Test.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Test.Designer.cs">
+      <DependentUpon>Test.cs</DependentUpon>
+    </Compile>
     <Compile Include="utils\GameImages.cs" />
     <Compile Include="utils\MoveControls.cs" />
     <Compile Include="utils\Quest.cs" />
@@ -82,6 +100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormWithTest.resx">
       <DependentUpon>FormWithTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Game.resx">
+      <DependentUpon>Game.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GameResult.resx">
       <DependentUpon>GameResult.cs</DependentUpon>
@@ -97,6 +118,12 @@
     </Compile>
     <EmbeddedResource Include="QuestPanel.resx">
       <DependentUpon>QuestPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Result.resx">
+      <DependentUpon>Result.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test.resx">
+      <DependentUpon>Test.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
