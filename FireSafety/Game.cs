@@ -24,14 +24,14 @@ namespace FireSafety
         List<Panel> targets_pb;
         System.Windows.Forms.Control parent_panel;
         int all_attemp = 0;
+        int good_attemp = 0;
         string folderPath = Environment.CurrentDirectory + "\\GameImages";
         DateTime time_start;
 
         public Game()
         {
             InitializeComponent();
-            //serialize_list_images();
-            //serialice_game_images();
+            Test gm = new Test();
             DeserializeMainPage();
             DeserializeGameImage();
             BuildMainPage();
@@ -211,6 +211,7 @@ namespace FireSafety
                     Controls.Remove(finded_pb);
                     targets_pb.Remove(finded_pb);
                     count_target_pb--;
+                    good_attemp++;
                     if (count_target_pb == 0)
                     {
                         complited_rows++;
@@ -221,39 +222,23 @@ namespace FireSafety
                         else
                         {
                             utils.stats.GameTime = DateTime.Now - time_start;
-                            utils.stats.WrongAnswers = all_attemp; 
+                            utils.stats.WrongAnswers = all_attemp;
+                            utils.stats.RightAnswers = good_attemp;
                             Test gm = new Test();
                             this.Parent.Controls.Add(gm);
                             this.Parent.Controls.Remove(this);
                         }
                     }
                 }
+                else
+                {
+                    all_attemp++;
+                }
             }
-            all_attemp++;
+            
             PointsLabel.Text = all_attemp.ToString();
             ctr.Parent = parent_panel;
             ctr.Location = new Point(start_x, start_y);
-        }
-
-        private void serialize_list_images()
-        {
-            BinaryFormatter formatter = new BinaryFormatter();
-
-            string searchPattern = "*.bmp";
-            string[] FilesName = Directory.GetFiles(folderPath, searchPattern);
-            List<utils.GameImages> gimg = new List<utils.GameImages>();
-
-            foreach (string file_name in FilesName)
-            {
-                Image img = Image.FromFile(file_name);
-                utils.GameImages gi = new utils.GameImages(file_name.Split('.')[0].Split('\\').Last(), img);
-                gimg.Add(gi);
-            }
-
-            using (FileStream fs = new FileStream("AnswersImages.dat", FileMode.OpenOrCreate))
-            {
-                formatter.Serialize(fs, gimg);
-            }
         }
 
         private void serialize_test()
@@ -274,90 +259,6 @@ namespace FireSafety
             using (FileStream fs = new FileStream("Test.dat", FileMode.OpenOrCreate))
             {
                 formatter.Serialize(fs, gimg);
-            }
-        }
-
-        private void serialice_game_images()
-        {
-            string image_1 = Environment.CurrentDirectory + "\\Design\\Znaki-pozh-bezopasnosti.jpg";
-            string image_2 = Environment.CurrentDirectory + "\\Design\\Без имени2.bmp";
-            string image_3 = Environment.CurrentDirectory + "\\Design\\z12.jpg";
-            string image_4 = Environment.CurrentDirectory + "\\Design\\Fire.bmp";
-            Image img1 = Image.FromFile(image_1);
-            Image img2 = Image.FromFile(image_2);
-            Image img3 = Image.FromFile(image_3);
-            Image img4 = Image.FromFile(image_4);
-
-            List<utils.TargetImages> targets = new List<utils.TargetImages>();
-            Dictionary<string, string> numbers = new Dictionary<string, string>
-            {
-                {"ExitLeft_Target", "246:83"},
-                {"ExitRight_Target", "460:83"},
-                {"Evacuation_Target", "247:173"},
-                {"ForOpenDestroyHere_Target", "459:173"},
-
-                {"Arrow_Target", "246:294"},
-                {"Arrow45_Target", "460:294"},
-                {"FireCock_Target", "675:294"},
-
-                {"Stairs_Target", "246:383"},
-                {"Extinguish_Target", "460:383"},
-                {"Telephone_Target", "675:383"},
-
-                {"PlaceWithFireInvertory_Target", "246:469"},
-                {"WaterSource_Target", "460:469"},
-                {"FireStand_Target", "675:469"},
-
-                {"FireGidrant_Target", "246:554"},
-                {"ButtonFireSettings_Target", "460:554"},
-                {"Annunciator_Target", "675:554"}
-            };
-
-            Dictionary<string, string> numbers2 = new Dictionary<string, string>
-            {
-                {"WorkOnGlasses_Target", "311:142"},
-                {"WorkOnHelment_Target", "461:142"},
-                {"WorkOnGlove_Target", "461:250"},
-                {"WorkOnShieldCloth_Target", "612:250"},
-                {"WorkTurnOff_Target", "461:468"},
-                {"WorkSmokeHere_Target", "612:468"}
-            };
-
-            Dictionary<string, string> numbers3 = new Dictionary<string, string>
-            {
-                {"BangBang_Target", "373:101"},
-                {"DagerousFluid_Target", "487:101"},
-                {"ElectricAlarm_Target", "373:283"},
-                {"HeyItsDangeroud_Target", "487:283"},
-                {"Okislitel_Target", "724:283"},
-                {"RadPole_Target", "260:462"},
-                {"AlarmCold_Target", "733:462"},
-                {"TooLongName_Target", "852:462"}
-            };
-
-            Dictionary<string, string> numbers4 = new Dictionary<string, string>
-            {
-                {"DidntSmoke_Target", "338:101"},
-                {"Unbeark_Target", "555:101"},
-                {"NoAccess_Target", "338:232"},
-                {"DontTouch_Target", "555:232"},
-                {"DidntOn_Target", "772:232"},
-                {"Prohod_Target", "338:369"},
-                {"DidntUsePhone_Target", "668:369"},
-                {"Metal_Target", "338:504"},
-                {"NePodhodit_Target", "555:504"}
-            };
-
-            targets.Add(new utils.TargetImages(img1, numbers));
-            targets.Add(new utils.TargetImages(img2, numbers2));
-            targets.Add(new utils.TargetImages(img3, numbers3));
-            targets.Add(new utils.TargetImages(img4, numbers4));
-
-            BinaryFormatter formatter = new BinaryFormatter();
-
-            using (FileStream fs = new FileStream("targets.dat", FileMode.OpenOrCreate))
-            {
-                formatter.Serialize(fs, targets);
             }
         }
 
@@ -398,7 +299,7 @@ namespace FireSafety
         private void timer1_Tick(object sender, EventArgs e)
         {
             TimeSpan delta = DateTime.Now - time_start;
-            TimeLabe.Text = delta.ToString(@"mm\:ss");
+            TimeLabe.Text = delta.ToString().Substring(0,8);
         }
     }
 }

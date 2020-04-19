@@ -17,6 +17,7 @@ namespace FireSafety
         private bool isDragging = false;
         private Point oldPos;
         private DateTime time_start;
+        private bool is_checked;
 
         public Test()
         {
@@ -42,37 +43,87 @@ namespace FireSafety
             {
                 if (string.IsNullOrEmpty(quests[i]))
                     break;
-                RadioButton rb = new RadioButton();
-                if ((i == _qs.GetSelectedItem() - 1) && (_qs.GetSelectedItem() != 0))
-                    rb.Checked = true;
-                rb.CheckedChanged += new EventHandler(SetSelectedIndex);
-                rb.Text = quests[i];
-                rb.Font = new Font("Century Gothic", 12);
-                rb.AutoSize = false;
-                Size len = TextRenderer.MeasureText(quests[i], rb.Font);
-                int height = (len.Width / 650 * 23) + 23;
-                if (height == 0)
-                    height = 17;
-                rb.Size = new Size(700, height);
-                tlpMainRadio.Controls.Add(rb, 0, i);
-                tlpMainRadio.RowCount++;
+
+                if (qs.RightAnswers.Count() > 1)
+                {
+                    var rb = new CheckBox();
+                    rb.CheckedChanged += new EventHandler(SetSelectedIndexBox);
+                    build(rb, quests, i);
+                }
+                else
+                {
+                    var rb = new RadioButton();
+                    rb.CheckedChanged += new EventHandler(SetSelectedIndexRadio);
+                    build(rb, quests, i);
+                }
             }
+        }
+
+        private void build(Control rb, string[] quests, int i)
+        {
+            rb.Text = quests[i];
+            rb.Font = new Font("Century Gothic", 12);
+            rb.AutoSize = false;
+            Size len = TextRenderer.MeasureText(quests[i], rb.Font);
+            int height = (len.Width / 650 * 23) + 23;
+            if (height == 0)
+                height = 17;
+            rb.Size = new Size(700, height);
+            tlpMainRadio.Controls.Add(rb, 0, i);
+            tlpMainRadio.RowCount++;
         }
 
 
         //Метод запоминает индекс радиобатона который выбрал пользователь 
         //и окрашивает кнопку с номером вопроса в зеленый цвет
-        private void SetSelectedIndex(object sender, System.EventArgs e)
+        private void SetSelectedIndexRadio(object sender, System.EventArgs e)
         {
             int i = 1;
+            List<int> answers = new List<int>();
+
             foreach (RadioButton myradbut in tlpMainRadio.Controls)
             {
                 if (myradbut.Checked == true)
                 {
-                    _qs.SetSelectedItem(i);
+                    answers.Add(i);
                 }
                 i++;
             }
+            if (answers.Count() > 0)
+                is_checked = true;
+            else
+                is_checked = false;
+            _qs.SetSelectedItem(answers);
+
+            foreach (QuestPanel btn in flpIconQuestion.Controls)
+            {
+                if (btn._index == _qs.GetCurIndex() + 1)
+                {
+                    btn.button1.BackColor = Color.FromArgb(178, 8, 55);
+                }
+            }
+        }
+
+        private void SetSelectedIndexBox(object sender, System.EventArgs e)
+        {
+            int i = 1;
+            List<int> answers = new List<int>();
+
+            foreach (CheckBox myradbut in tlpMainRadio.Controls)
+            {
+                if (myradbut.Checked == true)
+                {
+                    answers.Add(i);
+                }
+                i++;
+            }
+
+            if (answers.Count() > 0)
+                is_checked = true;
+            else
+                is_checked = false;
+
+            _qs.SetSelectedItem(answers);
 
             foreach (QuestPanel btn in flpIconQuestion.Controls)
             {
@@ -93,17 +144,17 @@ namespace FireSafety
             //    foreach (string question in Regex.Split(textfromfile, @"-------------------------------\r\n"))
             //    {
             //        List<string> sub_question = Regex.Split(question, "\r\n").Where(x => x != String.Empty).ToList();
-            //        int right_answer = 1;
+            //        List<int> right_answer = new List<int>();
             //        for (int i = 1; i <= sub_question.Count() - 1; i++)
             //        {
             //            if (char.IsUpper(sub_question[i][0]))
             //            {
-            //                right_answer = i;
+            //                right_answer.Add(i);
             //            }
 
             //            sub_question[i] = Regex.Split(sub_question[i], @"%%")[1];
             //        }
-            //        string Data = string.Join("#", sub_question.GetRange(1, sub_question.Count - 1));
+            //        string Data = string.Join("#", sub_question.GetRange(1, sub_question.Count - 1).ToArray());
 
             //        qs.Add(Data, sub_question[0], right_answer);
             //    }
@@ -167,24 +218,24 @@ namespace FireSafety
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            foreach (RadioButton myradbut in tlpMainRadio.Controls)
+            if (is_checked == true)
             {
-                if (myradbut.Checked == true)
+                if(_qs.IsLast() == true)
                 {
-                    if(_qs.IsLast() == true)
-                    {
-                        utils.stats.TestStats = _qs.GetHappyIndex();
-                        utils.stats.TestTime = DateTime.Now - time_start;
-                        this.Parent.Controls.Add(new Result());
-                        this.Parent.Controls.Remove(this);
-                    }
-                    _qs.GetNext();
-                    clear_table_layout();
-                    return;
+                    utils.stats.TestStats = _qs.GetHappyIndex();
+                    utils.stats.TestTime = DateTime.Now - time_start;
+                    this.Parent.Controls.Add(new Result());
+                    this.Parent.Controls.Remove(this);
                 }
+                _qs.GetNext();
+                clear_table_layout();
+                is_checked = false;
+                return;
             }
-            MessageBox.Show("Выберите вариант ответа.");
-
+            else
+            {
+                MessageBox.Show("Выберите вариант ответа.");
+            }
         }
 
 
@@ -225,7 +276,7 @@ namespace FireSafety
         private void timer1_Tick(object sender, EventArgs e)
         {
             TimeSpan delta = DateTime.Now - time_start;
-            TimeLabe.Text = delta.ToString(@"mm\:ss");
+            TimeLabe.Text = delta.ToString().Substring(0, 8);
         }
     }
 }

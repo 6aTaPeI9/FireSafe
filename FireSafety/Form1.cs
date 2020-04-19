@@ -17,8 +17,7 @@ namespace FireSafety
         public Form1()
         {
             InitializeComponent();
-            Game gm = new Game();
-            MainPanelBack.Controls.Add(gm);
+            MainPanelBack.Controls.Add(new FareSafetyStart());
         }
 
 
@@ -49,13 +48,6 @@ namespace FireSafety
         private void button13_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            FormWithTest fwt = new FormWithTest();
-            fwt.Show();
-            this.Hide();
         }
     }
 }

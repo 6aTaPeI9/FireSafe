@@ -40,6 +40,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.GoodAnswer = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.WrongAnswers = new System.Windows.Forms.Label();
             this.GameTime = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -106,7 +108,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(291, 34);
             this.button1.TabIndex = 22;
-            this.button1.Text = "Выйти";
+            this.button1.Text = "Завершить";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -166,25 +168,46 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.GoodAnswer);
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.WrongAnswers);
             this.groupBox1.Controls.Add(this.GameTime);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.groupBox1.Location = new System.Drawing.Point(306, 153);
+            this.groupBox1.Location = new System.Drawing.Point(306, 100);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(291, 90);
+            this.groupBox1.Size = new System.Drawing.Size(291, 143);
             this.groupBox1.TabIndex = 23;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Игра";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // GoodAnswer
+            // 
+            this.GoodAnswer.AutoSize = true;
+            this.GoodAnswer.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.GoodAnswer.Location = new System.Drawing.Point(204, 92);
+            this.GoodAnswer.Name = "GoodAnswer";
+            this.GoodAnswer.Size = new System.Drawing.Size(0, 21);
+            this.GoodAnswer.TabIndex = 13;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.Location = new System.Drawing.Point(14, 92);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(134, 21);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Кол-вол верных:";
+            // 
             // WrongAnswers
             // 
             this.WrongAnswers.AutoSize = true;
             this.WrongAnswers.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.WrongAnswers.Location = new System.Drawing.Point(163, 60);
+            this.WrongAnswers.Location = new System.Drawing.Point(204, 57);
             this.WrongAnswers.Name = "WrongAnswers";
             this.WrongAnswers.Size = new System.Drawing.Size(0, 21);
             this.WrongAnswers.TabIndex = 11;
@@ -193,7 +216,7 @@
             // 
             this.GameTime.AutoSize = true;
             this.GameTime.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.GameTime.Location = new System.Drawing.Point(163, 25);
+            this.GameTime.Location = new System.Drawing.Point(204, 21);
             this.GameTime.Name = "GameTime";
             this.GameTime.Size = new System.Drawing.Size(0, 21);
             this.GameTime.TabIndex = 10;
@@ -202,11 +225,12 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(14, 56);
+            this.label3.Location = new System.Drawing.Point(14, 57);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(142, 21);
+            this.label3.Size = new System.Drawing.Size(158, 21);
             this.label3.TabIndex = 9;
-            this.label3.Text = "Кол-вол попыток:";
+            this.label3.Text = "Кол-вол не верных:";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label1
             // 
@@ -257,5 +281,7 @@
         private System.Windows.Forms.Label GameTime;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label GoodAnswer;
     }
 }

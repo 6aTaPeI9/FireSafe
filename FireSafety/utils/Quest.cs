@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Drawing;
 
 namespace FireSafety
@@ -12,21 +12,20 @@ namespace FireSafety
     [Serializable]
     public class Quest
     {
-        public Quest(string data, string question, int right_answer)
+        public Quest(string data, string question, List<int> right_answers)
         {
             Data = data;
             Question = question;
-            RightAnswer = right_answer;
-            SelectedIndex = -1;
+            RightAnswers = right_answers;
         }
 
         public string Data { get; set; }
         public string Question { get; set; }
-        public int RightAnswer { get; set; }
+        public List<int> RightAnswers { get; set; }
         public int Index { get; set; }
         public Quest Previous { get; set; }
         public Quest Next { get; set; }
-        public int SelectedIndex { get; set; }
+        public List<int> SelectedIndex { get; set; }
     }
 
     //Класс для работы с классом Quest
@@ -39,9 +38,9 @@ namespace FireSafety
         public int count = 0; //Количество вопросов
 
         //Добавляем элемент в класс Quest
-        public void Add(string data, string question, int right_answer)
+        public void Add(string data, string question, List<int> right_answers)
         {
-            Quest node = new Quest(data, question, right_answer);
+            Quest node = new Quest(data, question, right_answers);
 
             if (curent == null)
             {
@@ -126,10 +125,7 @@ namespace FireSafety
             for (int i = 0; i <= this.count - 1; i++)
             {
 
-                if (iter.SelectedIndex == -1)
-                    return -1;
-
-                if (iter.SelectedIndex == iter.RightAnswer)
+                if (iter.SelectedIndex.SequenceEqual(iter.RightAnswers))
                     right_count++;
 
                 iter = iter.Next;
@@ -150,14 +146,9 @@ namespace FireSafety
             return curent.Index;
         }
 
-        public void SetSelectedItem(int index)
+        public void SetSelectedItem(List<int> indexs)
         {
-            curent.SelectedIndex = index;
-        }
-
-        public int GetSelectedItem()
-        {
-            return curent.SelectedIndex;
+            curent.SelectedIndex = indexs;
         }
     }
 }

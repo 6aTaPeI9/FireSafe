@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Data;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace FireSafety
@@ -15,15 +15,18 @@ namespace FireSafety
         public Result()
         {
             InitializeComponent();
-            GameTime.Text = utils.stats.GameTime.ToString(@"mm\:ss"); ;
+            int right_percentage = utils.stats.TestStats;
+            GameTime.Text = utils.stats.GameTime.ToString().Substring(0, 8);
             WrongAnswers.Text = utils.stats.WrongAnswers.ToString();
-            TestTime.Text = utils.stats.TestTime.ToString(@"mm\:ss"); ;
-            RightAnswer.Text = utils.stats.TestStats.ToString();
+            GoodAnswer.Text = utils.stats.RightAnswers.ToString();
+            TestTime.Text = utils.stats.TestTime.ToString().Substring(0, 8);
+            RightAnswer.Text = right_percentage.ToString() + " ("+(float)right_percentage/25*100+"%)";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Parent.Controls.Add(new FareSafetyStart());
+            this.Parent.Controls.Remove(this);
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -32,6 +35,11 @@ namespace FireSafety
         }
 
         private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
         {
 
         }
